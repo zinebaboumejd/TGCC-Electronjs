@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout des filiales.
+    </title>
+</head>
+<body>
+
+    <div id="form-container">
+        <form id="add-subsidiary-form">
+          <label for="name">Nom de la filiale :</label>
+          <input type="text" id="name" required>
+      
+          <label for="description">Description :</label>
+          <textarea id="description" required></textarea>
+      
+          <button type="submit">Ajouter la filiale</button>
+        </form>
+      </div>
+
+
+      <script>
+        const { ipcRenderer } = require('electron');
+      
+        const form = document.querySelector('#add-subsidiary-form');
+      
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+      
+          const name = document.querySelector('#name').value;
+          const description = document.querySelector('#description').value;
+      
+          ipcRenderer.send('add-subsidiary', { name, description });
+        });
+      
+        ipcRenderer.on('subsidiary-added', () => {
+          alert('La filiale a été ajoutée avec succès !');
+        });
+      </script>
+</body>
+</html>

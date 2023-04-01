@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajoute projets</title>
+</head>
+<body>
+    <div id="form-container">
+        <form id="add-project-form">
+          <label for="name">Nom du projet :</label>
+          <input type="text" id="name" required>
+      
+          <label for="description">Description :</label>
+          <textarea id="description" required></textarea>
+      
+          <label for="dateDebut">Date de début :</label>
+          <input type="date" id="dateDebut" required>
+      
+          <label for="dateFin">Date de fin :</label>
+          <input type="date" id="dateFin" required>
+      
+          <label for="budget">Budget :</label>
+          <input type="text" id="budget" required>
+      
+          <label for="etat">Etat :</label>
+          <input type="text" id="etat" required>
+      
+          <label for="employe">Employé responsable :</label>
+          <input type="text" id="employe" required>
+      
+          <button type="submit">Ajouter le projet</button>
+        </form>
+      </div>
+      
+      <script>
+        const { ipcRenderer } = require('electron');
+      
+        const form = document.querySelector('#add-project-form');
+      
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+      
+          const name = document.querySelector('#name').value;
+          const description = document.querySelector('#description').value;
+          const dateDebut = document.querySelector('#dateDebut').value;
+          const dateFin = document.querySelector('#dateFin').value;
+          const budget = document.querySelector('#budget').value;
+          const etat = document.querySelector('#etat').value;
+          const employe = document.querySelector('#employe').value;
+      
+          ipcRenderer.send('add-project', { name, description, dateDebut, dateFin, budget, etat, employe });
+        });
+      
+        ipcRenderer.on('project-added', () => {
+          alert('Le projet a été ajouté avec succès !');
+        });
+      </script>
+</body>
+</html>

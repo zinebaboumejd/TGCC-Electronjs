@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <!-- form ajouter employe -->
+    <header>
+        <h1>Bienvenue sur ma page d'accueil</h1>
+        <!-- Ajouter -->
+       <a href="index.html" >Index</a>
+      </header>
+    <form action="http://localhost:9000/employes/" method="POST">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <label for="telephone">Telephone</label>
+        <input type="text" name="telephone" id="telephone">
+        <label for="salaire">Salaire</label>
+        <input type="text" name="salaire" id="salaire">
+        <input type="submit" value="Ajouter">
+    </form>
+
+</body>
+
+</html>

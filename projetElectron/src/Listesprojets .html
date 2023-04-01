@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listes des projets </title>
+</head>
+<body>
+    <div id="project-list">
+        <h2>Liste des projets :</h2>
+        <ul id="project-items"></ul>
+      </div>
+      
+      <script>
+        const { ipcRenderer } = require('electron');
+      
+        const projectList = document.querySelector('#project-items');
+      
+        ipcRenderer.send('get-projects');
+      
+        ipcRenderer.on('projects', (event, projects) => {
+          projects.forEach((project) => {
+            const item = document.createElement('li');
+            item.innerHTML = `
+              <h3>${project.name}</h3>
+              <p><strong>Description :</strong> ${project.description}</p>
+              <p><strong>Date de début :</strong> ${project.dateDebut}</p>
+              <p><strong>Date de fin :</strong> ${project.dateFin}</p>
+              <p><strong>Budget :</strong> ${project.budget}</p>
+              <p><strong>Etat :</strong> ${project.etat}</p>
+              <p><strong>Employé responsable :</strong> ${project.employe}</p>
+            `;
+            projectList.appendChild(item);
+          });
+        });
+      </script>
+      
+</body>
+</html>
